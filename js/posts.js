@@ -103,3 +103,13 @@ function postList() {
     }
     alert(msg);
   }
+
+$('#myForm').on('submit',function(e){
+  e.preventDefault();
+  var name = $( "#exampleInputName" ).val();
+  var email = $( "#exampleInputEmail" ).val();
+
+  // In my case, I need to fetch these data before custom actions
+  console.log("ola", values);
+
+});
