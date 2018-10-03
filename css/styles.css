@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  transition: 0.1s; }
+
+body {
+  font-family: 'Roboto Condensed', Helvetica, sans-serif;
+  text-align: left;
+  font-size: 18px;
+  color: #303030; }
+
+.container {
+  max-width: 450px;
+  margin: 0 auto; }
