@@ -15,6 +15,10 @@ function listCustomers() {
   }
 
   function onGetCustomersSuccess(customers) {
+    if ($("#customersTable tbody").length == 0) {
+      $("#customersTable").append("<tbody></tbody>");
+    }
+    $("#customersTable tbody").empty();
     // Iterate over the collection of data
     $.each(customers, function (index, customer) {
       // Add a row to the post table
@@ -24,9 +28,6 @@ function listCustomers() {
 
   function addCustomerRow(customer) {
     // Check if <tbody> tag exists, add one if not
-     if ($("#customersTable tbody").length == 0) {
-      $("#customersTable").append("<tbody></tbody>");
-     }
      // Append row to <table>
      $("#customersTable tbody").append(
        buildCustomerRow(customer));
@@ -60,3 +61,29 @@ function listCustomers() {
   $('#customerTable').on('click', 'button', event => {
     getOrders(event.currentTarget);
   });
+
+
+$('#myForm').on('submit',function(e){
+  e.preventDefault();
+  var firstName = $( "#customerFirstName" ).val();
+  var lastName = $( "#customerLastName" ).val();
+  var customerAddress = $( "#customerAddress" ).val();
+
+  // In my case, I need to fetch these data before custom actions
+  $.ajax({
+    url: "https://custapp2018.azurewebsites.net/api/customers",
+    type: 'POST',
+    data: JSON.stringify({
+      "firstName": firstName,
+      "lastName": lastName,
+      "address": customerAddress}),
+    processData: false,
+    contentType: 'application/json',
+    success: function (comments) {
+      console.log("Yiiiaaaahhhhaaaaaa");
+    },
+    error: function (request, message, error) {
+      handleException(request, message, error);
+    }
+  });
+});
